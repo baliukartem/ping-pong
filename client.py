@@ -14,7 +14,7 @@ def connect_to_server():
     while True:
         try:
             client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            client.connect(('localhost', 8080)) # ---- Підключення до сервера
+            client.connect(('localhost', 6767)) # ---- Підключення до сервера
             buffer = ""
             game_state = {}
             my_id = int(client.recv(24).decode())
@@ -43,6 +43,10 @@ font_main = font.Font(None, 36)
 # --- ЗОБРАЖЕННЯ ----
 
 # --- ЗВУКИ ---
+mixer.init()
+mixer.music.load("Drevo - Смарагдове небо.mp3")
+mixer.music.set_volume(0.5)
+mixer.music.play(-1)
 
 # --- ГРА ---
 game_over = False
@@ -88,7 +92,10 @@ while True:
         continue  # Блокує гру після перемоги
 
     if game_state:
-        screen.fill((30, 30, 30))
+        back = image.load("back.jpg")
+        back = transform.scale(back, (800, 600))
+        screen.blit(back, (0,0))
+
         draw.rect(screen, (0, 255, 0), (20, game_state['paddles']['0'], 20, 100))
         draw.rect(screen, (255, 0, 255), (WIDTH - 40, game_state['paddles']['1'], 20, 100))
         draw.circle(screen, (255, 255, 255), (game_state['ball']['x'], game_state['ball']['y']), 10)
