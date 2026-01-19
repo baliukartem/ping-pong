@@ -95,7 +95,6 @@ while True:
         back = image.load("back.jpg")
         back = transform.scale(back, (800, 600))
         screen.blit(back, (0,0))
-
         draw.rect(screen, (0, 255, 0), (20, game_state['paddles']['0'], 20, 100))
         draw.rect(screen, (255, 0, 255), (WIDTH - 40, game_state['paddles']['1'], 20, 100))
         draw.circle(screen, (255, 255, 255), (game_state['ball']['x'], game_state['ball']['y']), 10)
